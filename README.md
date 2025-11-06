@@ -4,6 +4,8 @@ A simple, privacy-focused web application for tracking and visualizing thyroid b
 
 🔗 **[Live Demo](https://kolstr.github.io/thyroid-level-tracker/)**
 
+![Thyroid Level Tracker Screenshot](screenshot.png)
+
 ## Features
 
 ### 📊 Track Key Thyroid Markers
