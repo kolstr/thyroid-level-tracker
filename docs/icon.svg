@@ -1,0 +1,28 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#1f2937" rx="64"/>
+  
+  <!-- Thyroid symbol (butterfly shape) - even larger with less padding -->
+  <g transform="translate(256, 256)">
+    <!-- Left lobe -->
+    <ellipse cx="-100" cy="0" rx="120" ry="180" fill="#60a5fa" opacity="0.8"/>
+    <!-- Right lobe -->
+    <ellipse cx="100" cy="0" rx="120" ry="180" fill="#60a5fa" opacity="0.8"/>
+    <!-- Isthmus (connecting part) -->
+    <rect x="-70" y="-20" width="140" height="40" fill="#60a5fa" opacity="0.8" rx="20"/>
+  </g>
+  
+  <!-- Graph line overlay -->
+  <g transform="translate(0, 0)">
+    <!-- Simple upward trending line with points -->
+    <polyline points="60,380 130,355 200,330 280,300 350,255 450,220" 
+              fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Data points -->
+    <circle cx="60" cy="380" r="10" fill="#ffffff"/>
+    <circle cx="130" cy="355" r="10" fill="#ffffff"/>
+    <circle cx="200" cy="330" r="10" fill="#ffffff"/>
+    <circle cx="280" cy="300" r="10" fill="#ffffff"/>
+    <circle cx="350" cy="255" r="10" fill="#ffffff"/>
+    <circle cx="450" cy="220" r="12" fill="#10b981"/>
+  </g>
+</svg>

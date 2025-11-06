@@ -1,5 +1,9 @@
 # Thyroid Blood Level Tracker
 
+<p align="center">
+  <img src="docs/icon.svg" alt="Thyroid Tracker Icon" width="128" height="128">
+</p>
+
 A simple, privacy-focused web application for tracking and visualizing thyroid blood test results over time. All data is stored locally in your browser - no server, no accounts, complete privacy.
 
 🔗 **[Live Demo](https://kolstr.github.io/thyroid-level-tracker/)**
