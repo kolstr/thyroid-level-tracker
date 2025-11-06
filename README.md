@@ -53,6 +53,18 @@ A simple, privacy-focused web application for tracking and visualizing thyroid b
 - No data leaves your device
 - Works completely offline after initial load
 
+### 📱 Progressive Web App (PWA)
+
+- **Install as App**: Add to your home screen on iOS and Android
+- **Offline Support**: Works without internet connection after installation
+- **Native Feel**: Runs like a native mobile app in standalone mode
+- **Quick Access**: Launch directly from your device's home screen
+
+#### Installing on Mobile:
+
+- **iOS (Safari)**: Tap Share → "Add to Home Screen"
+- **Android (Chrome)**: Tap Menu (⋮) → "Install app" or "Add to Home screen"
+
 ## Usage
 
 ### Adding Measurements
