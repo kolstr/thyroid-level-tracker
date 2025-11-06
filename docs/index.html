@@ -125,7 +125,14 @@
                            placeholder="e.g., 100">
                     <p class="text-xs text-gray-500 mt-1">Optional: Current daily dosage</p>
                 </div>
-                <div class="md:col-span-2 lg:col-span-5 flex gap-2">
+                <div>
+                    <label for="thyreostatica" class="block text-sm font-medium text-gray-700 mb-1">Thyreostatica (mg)</label>
+                    <input type="number" id="thyreostatica" step="0.5" 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                           placeholder="e.g., 5">
+                    <p class="text-xs text-gray-500 mt-1">Optional: Methimazole, Carbimazole, etc.</p>
+                </div>
+                <div class="md:col-span-2 lg:col-span-6 flex gap-2">
                     <button type="submit" id="submitBtn"
                             class="w-full md:w-auto px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                         Add Measurement
@@ -193,6 +200,7 @@
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">FT4</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">TSH</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">L-Thyroxin (µg)</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Thyreostatica (mg)</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
@@ -389,6 +397,17 @@
                             pointRadius: 5,
                             pointHoverRadius: 7,
                             borderDash: [5, 5]
+                        },
+                        {
+                            label: 'Thyreostatica (mg)',
+                            data: [],
+                            borderColor: 'rgb(147, 51, 234)',
+                            backgroundColor: 'rgba(147, 51, 234, 0.1)',
+                            tension: 0.1,
+                            yAxisID: 'y2',
+                            pointRadius: 5,
+                            pointHoverRadius: 7,
+                            borderDash: [2, 2]
                         }
                     ]
                 },
@@ -478,7 +497,7 @@
                             position: 'right',
                             title: {
                                 display: true,
-                                text: 'L-Thyroxin (µg)'
+                                text: 'Medications (µg/mg)'
                             },
                             grid: {
                                 drawOnChartArea: false,
@@ -503,6 +522,7 @@
             chart.data.datasets[1].data = sortedMeasurements.map(m => m.ft4);
             chart.data.datasets[2].data = sortedMeasurements.map(m => m.tsh);
             chart.data.datasets[3].data = sortedMeasurements.map(m => m.lthyroxin || null);
+            chart.data.datasets[4].data = sortedMeasurements.map(m => m.thyreostatica || null);
             chart.update();
         }
 
@@ -533,6 +553,9 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         <span class="font-semibold text-yellow-700">${m.lthyroxin ? m.lthyroxin + ' µg' : '-'}</span>
                     </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <span class="font-semibold text-purple-700">${m.thyreostatica ? m.thyreostatica + ' mg' : '-'}</span>
+                    </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm">
                         <button onclick="editMeasurement('${m.timestamp}')" 
                                 class="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
@@ -548,6 +571,7 @@
             e.preventDefault();
             
             const lthyroxinValue = document.getElementById('lthyroxin').value;
+            const thyreostaticaValue = document.getElementById('thyreostatica').value;
             const editingTimestamp = document.getElementById('editingTimestamp').value;
             
             const measurement = {
@@ -555,7 +579,8 @@
                 ft3: parseFloat(document.getElementById('ft3').value),
                 ft4: parseFloat(document.getElementById('ft4').value),
                 tsh: parseFloat(document.getElementById('tsh').value),
-                lthyroxin: lthyroxinValue ? parseFloat(lthyroxinValue) : null
+                lthyroxin: lthyroxinValue ? parseFloat(lthyroxinValue) : null,
+                thyreostatica: thyreostaticaValue ? parseFloat(thyreostaticaValue) : null
             };
 
             if (editingTimestamp) {
@@ -592,6 +617,7 @@
             document.getElementById('ft4').value = measurement.ft4;
             document.getElementById('tsh').value = measurement.tsh;
             document.getElementById('lthyroxin').value = measurement.lthyroxin || '';
+            document.getElementById('thyreostatica').value = measurement.thyreostatica || '';
             
             // Store original timestamp for updating
             document.getElementById('editingTimestamp').value = timestamp;

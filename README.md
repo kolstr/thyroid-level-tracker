@@ -11,7 +11,8 @@ A simple, privacy-focused web application for tracking and visualizing thyroid b
 - **FT3** (Free Triiodothyronine)
 - **FT4** (Free Thyroxine)
 - **TSH** (Thyroid Stimulating Hormone)
-- **L-Thyroxin dosage** (optional medication tracking)
+- **L-Thyroxin dosage** (optional medication tracking for hypothyroidism)
+- **Thyreostatica dosage** (optional medication tracking for hyperthyroidism - e.g., Methimazole, Carbimazole)
 
 ### 📈 Visual Analytics
 
@@ -52,8 +53,9 @@ A simple, privacy-focused web application for tracking and visualizing thyroid b
 
 1. Enter the date of your blood test
 2. Input your FT3, FT4, and TSH values
-3. Optionally add your L-Thyroxin dosage
-4. Click "Add Measurement"
+3. Optionally add your L-Thyroxin dosage (for hypothyroidism treatment)
+4. Optionally add your Thyreostatica dosage (for hyperthyroidism treatment - e.g., Methimazole, Carbimazole)
+5. Click "Add Measurement"
 
 ### Configuring Normal Ranges
 
@@ -129,7 +131,8 @@ Exported JSON files contain:
       "ft3": 3.2,
       "ft4": 1.4,
       "tsh": 2.1,
-      "lthyroxin": 100
+      "lthyroxin": 100,
+      "thyreostatica": 5
     }
   ]
 }
