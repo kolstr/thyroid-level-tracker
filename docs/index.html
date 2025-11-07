@@ -165,54 +165,6 @@
         <!-- Chart -->
         <div class="bg-white rounded-lg shadow-md p-6 mb-6">
             <h2 class="text-xl font-semibold text-gray-700 mb-4">Blood Level Trends</h2>
-            
-            <!-- Chart Controls -->
-            <div class="mb-4 p-4 bg-gray-50 rounded-lg">
-                <h3 class="text-sm font-medium text-gray-700 mb-3">Show/Hide Markers:</h3>
-                <div class="flex flex-wrap gap-4">
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="toggleFT3" checked onchange="toggleDataset(0)" 
-                               class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                        <span class="flex items-center gap-1 text-sm">
-                            <span class="w-3 h-3 rounded" style="background-color: rgb(59, 130, 246);"></span>
-                            <span class="font-medium">FT3</span>
-                        </span>
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="toggleFT4" checked onchange="toggleDataset(1)" 
-                               class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
-                        <span class="flex items-center gap-1 text-sm">
-                            <span class="w-3 h-3 rounded" style="background-color: rgb(168, 85, 247);"></span>
-                            <span class="font-medium">FT4</span>
-                        </span>
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="toggleTSH" checked onchange="toggleDataset(2)" 
-                               class="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500">
-                        <span class="flex items-center gap-1 text-sm">
-                            <span class="w-3 h-3 rounded" style="background-color: rgb(239, 68, 68);"></span>
-                            <span class="font-medium">TSH</span>
-                        </span>
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="toggleLThyroxin" checked onchange="toggleDataset(3)" 
-                               class="w-4 h-4 text-yellow-600 border-gray-300 rounded focus:ring-yellow-500">
-                        <span class="flex items-center gap-1 text-sm">
-                            <span class="w-3 h-3 rounded border border-yellow-600" style="background-color: rgb(234, 179, 8);"></span>
-                            <span class="font-medium">L-Thyroxin</span>
-                        </span>
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="toggleThyreostatica" checked onchange="toggleDataset(4)" 
-                               class="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
-                        <span class="flex items-center gap-1 text-sm">
-                            <span class="w-3 h-3 rounded border border-purple-600" style="background-color: rgb(147, 51, 234);"></span>
-                            <span class="font-medium">Thyreostatica</span>
-                        </span>
-                    </label>
-                </div>
-            </div>
-            
             <div class="relative h-96">
                 <canvas id="thyroidChart"></canvas>
             </div>
@@ -291,15 +243,6 @@
         // Normal ranges (load from localStorage or use defaults)
         let normalRanges = JSON.parse(localStorage.getItem('normalRanges')) || JSON.parse(JSON.stringify(defaultRanges));
 
-        // Chart visibility settings (load from localStorage or default to all visible)
-        let chartVisibility = JSON.parse(localStorage.getItem('chartVisibility')) || {
-            ft3: true,
-            ft4: true,
-            tsh: true,
-            lthyroxin: true,
-            thyreostatica: true
-        };
-
         // Check if value is in normal range
         function isInRange(value, type) {
             const range = normalRanges[type];
@@ -366,31 +309,6 @@
 
         // Chart instance
         let chart;
-
-        // Toggle dataset visibility
-        function toggleDataset(datasetIndex) {
-            const datasetKeys = ['ft3', 'ft4', 'tsh', 'lthyroxin', 'thyreostatica'];
-            const key = datasetKeys[datasetIndex];
-            
-            // Toggle visibility
-            chartVisibility[key] = !chartVisibility[key];
-            
-            // Update chart
-            chart.data.datasets[datasetIndex].hidden = !chartVisibility[key];
-            chart.update();
-            
-            // Save to localStorage
-            localStorage.setItem('chartVisibility', JSON.stringify(chartVisibility));
-        }
-
-        // Load chart visibility settings
-        function loadChartVisibility() {
-            document.getElementById('toggleFT3').checked = chartVisibility.ft3;
-            document.getElementById('toggleFT4').checked = chartVisibility.ft4;
-            document.getElementById('toggleTSH').checked = chartVisibility.tsh;
-            document.getElementById('toggleLThyroxin').checked = chartVisibility.lthyroxin;
-            document.getElementById('toggleThyreostatica').checked = chartVisibility.thyreostatica;
-        }
 
         // Toggle range configuration
         function toggleRangeConfig() {
@@ -464,8 +382,7 @@
                             tension: 0.1,
                             yAxisID: 'y',
                             pointRadius: 5,
-                            pointHoverRadius: 7,
-                            hidden: !chartVisibility.ft3
+                            pointHoverRadius: 7
                         },
                         {
                             label: 'FT4',
@@ -475,8 +392,7 @@
                             tension: 0.1,
                             yAxisID: 'y',
                             pointRadius: 5,
-                            pointHoverRadius: 7,
-                            hidden: !chartVisibility.ft4
+                            pointHoverRadius: 7
                         },
                         {
                             label: 'TSH',
@@ -486,8 +402,7 @@
                             tension: 0.1,
                             yAxisID: 'y1',
                             pointRadius: 5,
-                            pointHoverRadius: 7,
-                            hidden: !chartVisibility.tsh
+                            pointHoverRadius: 7
                         },
                         {
                             label: 'L-Thyroxin (µg)',
@@ -498,8 +413,7 @@
                             yAxisID: 'y2',
                             pointRadius: 5,
                             pointHoverRadius: 7,
-                            borderDash: [5, 5],
-                            hidden: !chartVisibility.lthyroxin
+                            borderDash: [5, 5]
                         },
                         {
                             label: 'Thyreostatica (mg)',
@@ -510,8 +424,7 @@
                             yAxisID: 'y2',
                             pointRadius: 5,
                             pointHoverRadius: 7,
-                            borderDash: [2, 2],
-                            hidden: !chartVisibility.thyreostatica
+                            borderDash: [2, 2]
                         }
                     ]
                 },
@@ -878,7 +791,6 @@
 
         // Initialize app
         loadRangeForm();
-        loadChartVisibility();
         initChart();
         updateChart();
         updateTable();
