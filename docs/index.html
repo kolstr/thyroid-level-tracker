@@ -447,6 +447,12 @@
                                 afterLabel: function(context) {
                                     const datasetLabel = context.dataset.label;
                                     const value = context.parsed.y;
+                                    
+                                    // Skip normal ranges and status for medications
+                                    if (datasetLabel.includes('L-Thyroxin') || datasetLabel.includes('Thyreostatica')) {
+                                        return '';
+                                    }
+                                    
                                     let range, type;
                                     
                                     if (datasetLabel.includes('FT3')) {
