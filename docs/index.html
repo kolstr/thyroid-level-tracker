@@ -948,61 +948,12 @@
                     const sharedData = JSON.parse(jsonStr);
                     
                     if (sharedData.m && Array.isArray(sharedData.m)) {
-                        const hasExistingData = measurements.length > 0;
-                        
-                        if (hasExistingData) {
-                            const action = confirm(
-                                `This link contains ${sharedData.m.length} measurement(s).\n\n` +
-                                `You have ${measurements.length} existing measurement(s).\n\n` +
-                                `Click OK to MERGE with existing data.\n` +
-                                `Click Cancel to VIEW shared data only (won't save).`
-                            );
-                            
-                            if (action) {
-                                // Merge data
-                                const existingTimestamps = new Set(measurements.map(m => m.timestamp));
-                                const newMeasurements = sharedData.m.filter(
-                                    m => !existingTimestamps.has(m.timestamp)
-                                );
-                                measurements = [...measurements, ...newMeasurements];
-                                localStorage.setItem('thyroidMeasurements', JSON.stringify(measurements));
-                                
-                                if (sharedData.r) {
-                                    const importRanges = confirm('Import the shared normal ranges as well?');
-                                    if (importRanges) {
-                                        normalRanges = sharedData.r;
-                                        localStorage.setItem('normalRanges', JSON.stringify(normalRanges));
-                                    }
-                                }
-                                
-                                alert(`Merged ${newMeasurements.length} new measurement(s)!`);
-                            } else {
-                                // View only - temporarily replace data
-                                measurements = sharedData.m;
-                                if (sharedData.r) {
-                                    normalRanges = sharedData.r;
-                                }
-                                // Don't save to localStorage
-                            }
-                        } else {
-                            // No existing data, ask if they want to save
-                            const shouldSave = confirm(
-                                `This link contains ${sharedData.m.length} measurement(s).\n\n` +
-                                `Click OK to SAVE this data to your device.\n` +
-                                `Click Cancel to VIEW only (won't save).`
-                            );
-                            
-                            measurements = sharedData.m;
-                            if (sharedData.r) {
-                                normalRanges = sharedData.r;
-                            }
-                            
-                            if (shouldSave) {
-                                localStorage.setItem('thyroidMeasurements', JSON.stringify(measurements));
-                                localStorage.setItem('normalRanges', JSON.stringify(normalRanges));
-                                alert('Data saved to your device!');
-                            }
+                        // View only - temporarily use shared data without saving
+                        measurements = sharedData.m;
+                        if (sharedData.r) {
+                            normalRanges = sharedData.r;
                         }
+                        // Don't save to localStorage - just view
                         
                         // Clear URL parameters after loading
                         window.history.replaceState({}, document.title, window.location.pathname);
