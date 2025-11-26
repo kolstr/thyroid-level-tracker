@@ -43,6 +43,7 @@ A simple, privacy-focused web application for tracking and visualizing thyroid b
 
 - **Export**: Download all your data as JSON (backup or transfer)
 - **Import**: Restore data from previously exported files
+- **Share**: Generate a link to share your data with others (e.g., your doctor)
 - **Merge or Replace**: Choose how to handle existing data when importing
 - **Edit/Delete**: Modify or remove individual measurements
 
@@ -98,6 +99,13 @@ A simple, privacy-focused web application for tracking and visualizing thyroid b
 
 - Click "Edit" next to any measurement to modify it
 - Click "Delete" to remove a measurement (with confirmation)
+
+### Sharing Your Data
+
+1. Click the "Share" button in the Measurement History section
+2. A shareable link containing all your data will be copied to your clipboard
+3. Send this link to anyone (e.g., your doctor) to let them view your data
+4. Recipients can view the data without it being saved to their device
 
 ## Technical Details
 
